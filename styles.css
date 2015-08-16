@@ -12,6 +12,10 @@ body {
 	background-color: #625B7F;
 }
 
+main {
+	margin: 15px;
+}
+
 header {
 	background-color: #D7FF99;
 }
@@ -23,7 +27,7 @@ h1 {
 
 fieldset {
 	background-color: #ACCC7B;
-	margin: 5px 15px;
+	margin: 5px 0;
 	padding: 10px 20px;
 	border: 2px solid gray;
 }
@@ -71,6 +75,13 @@ li:nth-child(even) {
 
 .remove {
 	float: right;
+}
+
+span {
+	background-color: #B9FF4D;
+	margin-left: 5px;
+	padding: 2px;
+	border-radius: 5px;
 }
 
 .score1 {

@@ -1,15 +1,18 @@
-//custom toString prototype for appending employees to list
-Object.prototype.toString = function(employee){
-	return employee.firstname + " " + employee.lastname + ", Employee #" + employee.number + ", " + employee.title + ", $" + employee.salary.toLocaleString() + ", ";
-}
+
+//create an object constructor for employees
+var Employee = function(){
+	this.listOut = function(employee){
+		return employee.firstname + " " + employee.lastname + ", Employee #" + employee.number + ", " + employee.title + ", Annual Salary: $" + employee.salary.toLocaleString() + " ";
+	}
+};
 
 //create an object constructor to store employees and other things
 var Company = function(){
 	this.employees = [],
-	this.totalSalaries = function(){
+	this.calcTotalSalary = function(){
 		var totalSalary = 0;
 		for(var i=0; i <= this.employees.length - 1; i++){
-			totalSalary += this.employees[i].salary;
+			totalSalary += parseInt(this.employees[i].salary);
 		};
 		return totalSalary;
 	}
@@ -22,7 +25,7 @@ var myCompany = new Company();
 $(function(){
 	//When form is submitted do this...
 	$('#employeeInfo').submit(function(e){
-		var employee = {};
+		var employee = new Employee;
 		var $inputs = $('#employeeInfo :input');
 		
 		//Loop through each input and create a new property value
@@ -37,10 +40,11 @@ $(function(){
 
 	//when Random button is clicked do this...
 	$('#random').click(function(){
-		var employee = {};
+		var employee = new Employee;
 		generateRandomEmployee(employee);
 		appendEmployee(employee);
 	});
+
 
 });
 
@@ -74,18 +78,23 @@ function appendEmployee(employee){
 	var $newSpan = $('<span>');
 	var $remove = $('<button class=remove>Remove Employee</button>')
 
+	//set data attribute for employee number
 	$newLi.attr('data-id', employee.number);
 	$newSpan.text("Review Score: " + employee.rating);
 	$newSpan.attr('class', 'score' + employee.rating);
-	$newLi.text(employee.toString(employee));
+	$newLi.text(employee.listOut(employee));
 	$newLi.append($newSpan, $remove);
 	$employeeList.append($newLi);
 
 	//push employee object to myCompany array of employees
 	myCompany.employees.push(employee);
+
+	//update salary total...
+	updateSalary();
 	
 	//remove employee
 	removeEmployee(employee);
+
 }
 
 //removes employee from DOM and myCompany object
@@ -104,6 +113,19 @@ function removeEmployee(employee){
 		};
 		//remove the DOM element
 		$(this).parent().remove();
+
+		//update salary total
+		updateSalary();
+
+
 	});
+}
+
+//run this to update the sum of all salaries
+function updateSalary(){
+		//calculates total salary and stores in var
+		var totalSalary = (parseInt(myCompany.calcTotalSalary()));
+		//adds total to DOM
+		$('#salary').text(" $" + totalSalary);
 }
 
