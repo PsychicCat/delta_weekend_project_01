@@ -1,0 +1,94 @@
+html, body, div, span, header, h1, ul, li, form, fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #625B7F;
+}
+
+header {
+	background-color: #D7FF99;
+}
+
+h1 {
+	font-size: 36px;
+	text-align: center;
+}
+
+fieldset {
+	background-color: #ACCC7B;
+	margin: 5px 15px;
+	padding: 10px 20px;
+	border: 2px solid gray;
+}
+
+legend {
+	background-color: #B9FF4D;
+	border-radius: 3px;
+
+}
+
+input, select {
+	margin-right: 10px;
+}
+
+form {
+	margin-bottom: 10px;
+}
+
+ul {
+	margin: 0 15px;
+	padding: 10px;
+	background-color: #B2A7A7;
+	font-size: 18px;
+}
+
+li {
+	padding: 5px;
+	display: block;
+	text-align: left;
+	font-size: 14px;
+	list-style-type: none;
+}
+
+li:nth-child(odd) {
+	background-color: #7F7877;
+}
+
+li:nth-child(even) {
+	background-color: #FFF2EF;
+}
+
+#buttons {
+	margin: 0 0 10px 15px;
+}
+
+.remove {
+	float: right;
+}
+
+.score1 {
+	background-color: #FF000F;
+}
+
+.score2 {
+	background-color: #B2000A;
+}
+
+.score3 {
+	background-color: #6FFF93;
+}
+
+.score4 {
+	background-color: #00FF40;
+}
+
+.score5 {
+	background-color: #00B22D;
+}

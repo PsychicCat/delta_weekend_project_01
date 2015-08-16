@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Employee Information</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/scripts.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Employee Management System</h1>
+	</header>
+	<main>
+		<form id="employeeInfo">
+			<fieldset>
+				<legend>Employee Details:</legend>
+					<label for="firstname">First Name:</label>
+					<input type="text" name="firstname" required="required" />
+					<label for="lastname">Last Name:</label>
+					<input type="text" name="lastname" required="required" />
+					<label for="employeeNumber">Employee Number:</label>
+					<input type="number" name="number" required="required" />
+						<label for="title">Title:</label>
+						<select name="title" required="required">
+							<option value="">--Select Title--</option>
+							<option value="Instructor">Instructor</option>
+							<option value="CEO">CEO</option>
+							<option value="Student">Student</option>
+							<option value="Dog">Dog</option>
+							<option value="Cat">Cat</option>
+						</select>
+			</fieldset>
+			<fieldset>
+				<legend>Review/Salary:</legend>
+					<label for="rating">Last Review Score (1=poor, 5=great!):</label>
+						<select name="rating" required="required">
+							<option value="">--Select Rating--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					<label for="salary">Salary:</label>
+					<input type="number" name="salary" required="required" />
+				<div>
+					<input type="submit" id="submit" value="Submit Employee" />
+				</div>
+			</fieldset>
+		</form>
+		<div id="buttons">
+			<button id="random">Generate Random Employee</button>
+			<button id="sort" value="Sort Employees">Sort Employees A-Z</button>
+		</div>
+		<ul id="employeeList">Employee List:</ul>
+	</main>
+</body>
+</html>
