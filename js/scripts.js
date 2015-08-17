@@ -1,4 +1,3 @@
-
 //create an object constructor for employees
 var Employee = function(){
 	this.listOut = function(employee){
@@ -24,7 +23,7 @@ var myCompany = new Company();
 
 $(function(){
 	//When form is submitted do this...
-	$('#employeeInfo').submit(function(e){
+	$('#employeeInfo').on('submit', function(e){
 		var employee = new Employee;
 		var $inputs = $('#employeeInfo :input');
 		
@@ -36,17 +35,23 @@ $(function(){
 		
 		//append employee to list
 		appendEmployee(employee);
+		
+		//push employee object to myCompany array of employees
+		myCompany.employees.push(employee);
 	});
 
 	//when Random button is clicked do this...
-	$('#random').click(function(){
+	$('#random').on('click', function(){
 		var employee = new Employee;
 		generateRandomEmployee(employee);
+		//push employee object to myCompany array of employees
+		myCompany.employees.push(employee);
+		//add employee to DOM
 		appendEmployee(employee);
 	});
 
 	//when Sort button is clicked do this...
-	$('#sort').click(function(){
+	$('#sort').on('click', function(){
 		sortEmployees();
 	})
 
@@ -80,18 +85,17 @@ function appendEmployee(employee){
 	var $employeeList = $('#employeeList');
 	var $newLi = $('<li>');
 	var $newSpan = $('<span>');
-	var $remove = $('<button class=remove>Remove Employee</button>')
+	var $remove = $('<button>')
 
 	//set data attribute for employee number
+	$remove.attr('class', 'remove');
+	$remove.text('Remove Employee');
 	$newLi.attr('data-id', employee.number);
 	$newSpan.text("Review Score: " + employee.rating);
 	$newSpan.attr('class', 'score' + employee.rating);
 	$newLi.text(employee.listOut(employee));
 	$newLi.append($newSpan, $remove);
 	$employeeList.append($newLi);
-
-	//push employee object to myCompany array of employees
-	myCompany.employees.push(employee);
 
 	//update salary total...
 	updateSalary();
@@ -104,7 +108,7 @@ function appendEmployee(employee){
 //removes employee from DOM and myCompany object
 function removeEmployee(employee){
 		//remove functionality
-	$('.remove').click(function(){
+	$('.remove').on('click', function(){
 		//set variable for employee id you want to remove
 		var $id = $(this).parent().data('id');
 		//remove the employee object from company array
@@ -117,11 +121,8 @@ function removeEmployee(employee){
 		};
 		//remove the DOM element
 		$(this).parent().remove();
-
 		//update salary total
 		updateSalary();
-
-
 	});
 }
 
@@ -133,6 +134,7 @@ function updateSalary(){
 		$('#salary').text(" $" + totalSalary);
 }
 
+//sort function for employees
 function sortEmployees(){
 	var employees = myCompany.employees;
 	var $employeeList = $('#employeeList');
@@ -153,17 +155,7 @@ function sortEmployees(){
 
 	//Loop through the employees and repopulate the DOM
 	for (var i=0; i < employees.length; i++){
-		var $newLi = $('<li>');
-		var currentEmployee = new Employee;
 		currentEmployee = employees[i];
-		var $newSpan = $('<span>');
-		var $remove = $('<button class=remove>Remove Employee</button>')
-		$newLi.attr('data-id', currentEmployee.number);
-		$newSpan.text("Review Score: " + currentEmployee.rating);
-		$newSpan.attr('class', 'score' + currentEmployee.rating);
-		$newLi.text(currentEmployee.listOut(currentEmployee));
-		$newLi.append($newSpan, $remove);
-		$employeeList.append($newLi);
+		appendEmployee(currentEmployee);
 	};
-	removeEmployee(currentEmployee);
 }
