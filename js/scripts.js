@@ -45,6 +45,10 @@ $(function(){
 		appendEmployee(employee);
 	});
 
+	//when Sort button is clicked do this...
+	$('#sort').click(function(){
+		sortEmployees();
+	})
 
 });
 
@@ -103,7 +107,7 @@ function removeEmployee(employee){
 	$('.remove').click(function(){
 		//set variable for employee id you want to remove
 		var $id = $(this).parent().data('id');
-		//remove the employee object from array
+		//remove the employee object from company array
 		for (var i=0; i < myCompany.employees.length; i++){
 			if(myCompany.employees[i].number == $id){
 				console.log("Removing " + myCompany.employees[i].firstname + " " + myCompany.employees[i].lastname);
@@ -127,5 +131,47 @@ function updateSalary(){
 		var totalSalary = (parseInt(myCompany.calcTotalSalary()));
 		//adds total to DOM
 		$('#salary').text(" $" + totalSalary);
+}
+
+function sortEmployees(){
+	var employees = myCompany.employees;
+	var $employeeList = $('#employeeList');
+
+	//First, remove the current display of employees
+	$employeeList.children().remove();
+
+	//Sort the array of employees alphabetically by lastname
+	employees.sort(function (a,b){
+		if (a.lastname > b.lastname) {
+			return 1;
+		}
+		if (a.lastname < b.lastname) {
+			return -1;
+		}
+		return 0;
+	});
+
+	//Loop through the employees and repopulate the DOM
+	for (var i=0; i < employees.length; i++){
+		var $newLi = $('<li>');
+		var currentEmployee = new Employee;
+		currentEmployee = employees[i];
+		var $newSpan = $('<span>');
+		var $remove = $('<button class=remove>Remove Employee</button>')
+		$newLi.attr('data-id', currentEmployee.number);
+		$newSpan.text("Review Score: " + currentEmployee.rating);
+		$newSpan.attr('class', 'score' + currentEmployee.rating);
+
+		
+		$newLi.text(currentEmployee.listOut(currentEmployee));
+		$newLi.append($newSpan);
+		$newLi.append($remove);
+		$employeeList.append($newLi);
+
+	};
+
+	removeEmployee(currentEmployee);
+
+
 }
 
